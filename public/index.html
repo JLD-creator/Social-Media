@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevSpace — foro para developers</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo" onclick="goHome()"><span class="logo-bracket">&lt;</span>DevSpace<span class="logo-bracket">/&gt;</span></div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="buscar posts..." onkeydown="if(event.key==='Enter')doSearch()">
+    </div>
+    <div id="topbar-auth" class="topbar-auth"></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- FEED -->
+  <section id="view-feed" class="view active">
+    <div class="feed-layout">
+      <div class="feed-main">
+        <div class="feed-toolbar">
+          <div class="tag-filters" id="tag-filters">
+            <button class="tag-chip active" data-tag="">todos</button>
+          </div>
+          <button class="btn-primary" id="new-post-btn" onclick="openPostModal()">+ nuevo post</button>
+        </div>
+        <div id="feed-list" class="feed-list"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+      <aside class="feed-sidebar">
+        <div class="sidebar-card">
+          <p class="sidebar-title">$ acerca de</p>
+          <p class="sidebar-text">Un foro de nicho para compartir aprendizajes, dudas y proyectos de programación. Sin ruido, solo código y conversación.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- POST DETAIL -->
+  <section id="view-post" class="view">
+    <button class="btn-back" onclick="goHome()">&larr; volver</button>
+    <div id="post-detail"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="view-profile" class="view">
+    <button class="btn-back" onclick="goHome()">&larr; volver</button>
+    <div id="profile-detail"></div>
+  </section>
+
+  <!-- MOD PANEL -->
+  <section id="view-mod" class="view">
+    <button class="btn-back" onclick="goHome()">&larr; volver</button>
+    <h2 class="section-title">Panel de moderación</h2>
+    <div id="mod-reports"></div>
+  </section>
+
+</main>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div id="login-form">
+      <h2>entrar</h2>
+      <input type="email" id="login-email" placeholder="email">
+      <input type="password" id="login-password" placeholder="contraseña">
+      <button class="btn-primary" onclick="login()">entrar</button>
+      <p class="form-error" id="login-error"></p>
+      <p class="switch-form">¿nuevo aquí? <a onclick="showRegisterModal()">crear cuenta</a></p>
+    </div>
+    <div id="register-form" style="display:none">
+      <h2>crear cuenta</h2>
+      <input type="text" id="reg-username" placeholder="username">
+      <input type="email" id="reg-email" placeholder="email">
+      <input type="password" id="reg-password" placeholder="contraseña (mín. 6)">
+      <button class="btn-primary" onclick="register()">crear cuenta</button>
+      <p class="form-error" id="reg-error"></p>
+      <p class="switch-form">¿ya tienes cuenta? <a onclick="showLoginModal()">entrar</a></p>
+    </div>
+    <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div id="post-modal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <h2>nuevo post</h2>
+    <input type="text" id="post-title" placeholder="título" maxlength="120">
+    <select id="post-tag">
+      <option value="general">general</option>
+      <option value="javascript">javascript</option>
+      <option value="python">python</option>
+      <option value="backend">backend</option>
+      <option value="frontend">frontend</option>
+      <option value="devops">devops</option>
+      <option value="carrera">carrera</option>
+    </select>
+    <textarea id="post-content" placeholder="cuéntanos..." rows="6"></textarea>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closePostModal()">cancelar</button>
+      <button class="btn-primary" onclick="submitPost()">publicar</button>
+    </div>
+    <button class="modal-close" onclick="closePostModal()">&times;</button>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
