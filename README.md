@@ -68,3 +68,5 @@ mini-red-social/
 - Editar posts/comentarios (ahora mismo solo se pueden borrar)
 - Markdown en el contenido de los posts, con resaltado de sintaxis para bloques de código
 - Migrar a PostgreSQL para producción
+
+Creado por Jesús Lozano Díaz - Graduado en DAW
